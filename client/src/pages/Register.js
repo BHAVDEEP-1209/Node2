@@ -19,7 +19,7 @@ const Register = () => {
                 },
                 body: JSON.stringify(data),
               }).then((res)=>{
-                 if(res.status==200){
+                 if(res.status==201){
                   window.alert("user added sucessfully!");
                   navigate("/");
                  }else if(res.status==204){

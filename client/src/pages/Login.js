@@ -2,10 +2,13 @@ import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import "../Styles/Login.scss"
+import { useDispatch } from 'react-redux';
+import { setValue } from '../slices/userSlice';
 
 
 const Login = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
         const handleSubmit=(e)=>{
         e.preventDefault();
         const email = e.target[0].value;
@@ -19,9 +22,13 @@ const Login = () => {
                 },
                 body: JSON.stringify(data),
               }).then((res)=>{
-                 if(res.status==200){
+                 if(res.status==201){
+                  console.log(res);
                     window.alert("login successful!");
+                    dispatch(setValue(email)); 
                     navigate("/homepage");
+                 }else if(res.status==203){
+                  window.alert("Wrong credentails!");
                  }else{
                     window.alert("User Not Found! Plz register.");
                  }
